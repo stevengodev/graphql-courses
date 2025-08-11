@@ -1,0 +1,76 @@
+# Queries
+type Query {
+
+    # User
+    findUserById(userId: ID!): User
+    findAllUsersPaginated(page: Int!, size: Int!): UserPaginator!
+
+    # Course
+    findCourseById(courseId: ID!): Course
+    findAllCoursesPaginated(page: Int!, size: Int!): CoursePaginator!
+}
+
+# Response
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    rol: Role!
+    createdAt: String!
+    updatedAt: String
+}
+
+enum Role {
+    STUDENT
+    TEACHER
+    ADMIN
+}
+
+type Course {
+    id: ID!
+    title: String!
+    description: String
+    teacher: User!
+    students: [User!]
+    lessons: [Lesson!]
+    createdAt: String!
+    updatedAt: String
+}
+
+type Lesson {
+    id: ID!
+    title: String!
+    content: String!
+    course: Course!
+    resources: [Resource!]
+    createdAt: String!
+    updatedAt: String
+}
+
+type Resource {
+    id: ID!
+    type: ResourceType!
+    url: String!
+    description: String
+    lesson: Lesson!
+}
+
+enum ResourceType {
+    VIDEO
+    PDF
+    LINK
+}
+
+type UserPaginator {
+    data: [User!]!
+    totalPages: Int!
+    currentPage: Int!
+}
+
+type CoursePaginator {
+    data: [Course!]!
+    totalPages: Int!
+    currentPage: Int!
+}
+
+# Input
