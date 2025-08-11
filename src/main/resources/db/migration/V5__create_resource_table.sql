@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS resource (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    type VARCHAR(20) NOT NULL CHECK (type IN ('VIDEO', 'PDF', 'LINK')),
+    url TEXT NOT NULL,
+    description TEXT,
+    lesson_id INT NOT NULL REFERENCES lesson(id)
+);

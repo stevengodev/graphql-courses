@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS lesson (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    content TEXT NOT NULL,
+    course_id INTEGER NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    CONSTRAINT fk_lesson_course FOREIGN KEY (course_id) REFERENCES course(id)
+);
