@@ -10,6 +10,25 @@ type Query {
     findAllCoursesPaginated(page: Int!, size: Int!): CoursePaginator!
 }
 
+type Mutation {
+    createUser(userInput: UserInput!): User!
+    createCourse(courseInput: CourseInput!): Course!
+    createLesson(lessonInput: LessonInput!): Lesson!
+    createResource(resourceInput: ResourceInput!): Resource!
+
+    updateUser(id: ID!, userInput: UserInput!): User!
+    updateCourse(id: ID!, courseInput: CourseInput!): Course!
+    updateLesson(id: ID!, lessonInput: LessonInput!): Lesson!
+    updateResource(id: ID!, resourceInput: ResourceInput!): Resource!
+
+    deleteUser(id: ID!): Boolean!
+    deleteCourse(id: ID!): Boolean!
+    deleteLesson(id: ID!): Boolean!
+    deleteResource(id: ID!): Boolean!
+
+    enrollStudentToCourse(studentId: ID!, courseId: ID!): Course!
+}
+
 # Response
 type User {
     id: ID!
@@ -18,6 +37,8 @@ type User {
     rol: Role!
     createdAt: String!
     updatedAt: String
+    coursesTeaching: [Course!] # Cursos que enseña un profesor
+    coursesEnrolled: [Course!] # Cursos en los que está inscrito un estudiante
 }
 
 enum Role {
@@ -74,3 +95,29 @@ type CoursePaginator {
 }
 
 # Input
+
+input UserInput {
+    name: String!
+    email: String!
+    password: String!
+    rol: Role!
+}
+
+input CourseInput {
+    title: String!
+    description: String
+    teacherId: ID!
+}
+
+input LessonInput {
+    title: String!
+    content: String!
+    courseId: ID!
+}
+
+input ResourceInput {
+    type: ResourceType!
+    url: String!
+    description: String
+    lessonId: ID!
+}
