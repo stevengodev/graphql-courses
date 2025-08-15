@@ -30,7 +30,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role rol;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
