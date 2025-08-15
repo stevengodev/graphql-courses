@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.foliaco.graphql_course.util.DataPaginator;
 
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     private UserMapper userMapper;
 
+    @Transactional(readOnly = true)
     @Override
     public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(
@@ -28,18 +30,21 @@ public class UserServiceImpl implements UserService {
         );
     }
 
+    @Transactional(readOnly = true)
     @Override
     public DataPaginator<List<User>> findAll(Pageable pageable) {
         Page<User> pageUser = userRepository.findAll(pageable);
         return new DataPaginator<>(pageUser.getContent(), pageUser.getTotalPages(), pageUser.getNumber());
     }
 
+    @Transactional
     @Override
     public User createUser(UserInput input) {
         User user = userMapper.toUser(input);
         return userRepository.save(user);
     }
 
+    @Transactional
     @Override
     public User updateUser(Integer id, UserInput userInput) {
         User user = userRepository.findById(id).orElseThrow(
@@ -56,6 +61,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
     @Override
     public boolean deleteById(Integer id) {
         
