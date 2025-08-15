@@ -8,6 +8,15 @@ type Query {
     # Course
     findCourseById(courseId: ID!): Course
     findAllCoursesPaginated(page: Int!, size: Int!): CoursePaginator!
+
+    # Lesson
+    findLessonById(lessonId: ID!): Lesson
+    findAllLessonsPaginated(page: Int!, size: Int!): LessonPaginator!
+
+    #Resource
+    findResourceById(resourceId: ID!): Resource
+    findAllResourcesPaginated(page: Int!, size: Int!): ResourcesPaginator!
+
 }
 
 type Mutation {
@@ -90,6 +99,18 @@ type UserPaginator {
 
 type CoursePaginator {
     data: [Course!]!
+    totalPages: Int!
+    currentPage: Int!
+}
+
+type LessonPaginator {
+    data: [Lesson!]!
+    totalPages: Int!
+    currentPage: Int!
+}
+
+type ResourcesPaginator {
+    data: [Resource!]!
     totalPages: Int!
     currentPage: Int!
 }

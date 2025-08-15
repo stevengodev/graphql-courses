@@ -1,6 +1,5 @@
 package com.foliaco.graphql_course.user;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.foliaco.graphql_course.graphql.UserInput;

@@ -72,12 +72,15 @@ public class CourseServiceImpl implements CourseService{
         return courseRepository.save(course);
     }
 
+    @Transactional
     @Override
     public boolean deleteById(Integer id) {
 
         Course course = courseRepository.findById(id).orElseThrow(
             () -> new NotFoundException("Course not found with id: " + id )
         );
+
+        course.getStudents().clear();
 
         courseRepository.delete(course);
         return true;

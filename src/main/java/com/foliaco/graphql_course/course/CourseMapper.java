@@ -12,7 +12,6 @@ public class CourseMapper {
         course.setTitle(courseInput.title());
         course.setDescription(courseInput.description());
         course.setTeacher(user);
-
         return course;
     }
 
